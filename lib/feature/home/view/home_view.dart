@@ -1,6 +1,7 @@
 import 'package:demo_api/feature/home/cubit/load_data_cubit.dart';
 import 'package:demo_api/feature/home/model/input_parameter_model.dart';
 import 'package:demo_api/feature/home/view/widgets/custom_button.dart';
+import 'package:demo_api/feature/view_appointments/view/view_appointments.dart';
 import 'package:demo_api/static/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,7 +43,8 @@ class _HomeViewState extends State<HomeView> {
             icon: const Icon(Icons.list_sharp),
             onPressed: () {
               BlocProvider.of<LoadDataCubit>(context).getInitial();
-              Get.toNamed(AppRouters.viewAppointments);
+              //TODO pass viewmodel to viewApointments
+              // Get.to(ViewAppointments(responseViewModel: ,));
             },
           ),
           CustomButton(
