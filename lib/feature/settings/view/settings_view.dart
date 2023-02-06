@@ -1,6 +1,7 @@
 import 'package:demo_api/feature/home/model/input_parameter_model.dart';
+import 'package:demo_api/feature/home/view/home_view.dart';
 import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
+
 import 'package:demo_api/feature/settings/view/widgets/input_field.dart';
 import 'package:flutter/material.dart';
 
@@ -42,15 +43,25 @@ class _SettingsViewState extends State<SettingsView> {
               child: const Text('SAVE'))
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.text_fields),
+        onPressed: () {
+          _userNameController.text = "Gary";
+          _passwordController.text = "123456789";
+          _urlController.text = url;
+        },
+      ),
     );
   }
 }
 
+const url =
+    'https://www.skylinecms.co.uk/alpha/RemoteEngineerAPI/GetAppointmentDetails';
 saveDetails({
   required BuildContext context,
-  required String url,
-  required String username,
-  required String password,
+  String url = '',
+  String username = '',
+  String password = '',
 }) {
   Get.back(
     result: InputParameterModel(

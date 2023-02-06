@@ -31,7 +31,7 @@ class LoadDataCubit extends Cubit<LoadDataState> {
       ));
 
       ResponseViewModel viewModel = data.mapToViewModel();
-      print("in cubit ${viewModel.fullName}");
+      print(" ${viewModel.fullName}");
     } catch (e) {
       emit(LoadDataFailure(message: 'Failed State'));
     }

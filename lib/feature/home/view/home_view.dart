@@ -4,8 +4,6 @@ import 'package:demo_api/feature/home/view/widgets/custom_button.dart';
 import 'package:demo_api/static/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:go_router/go_router.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:get/get.dart';
 
 class HomeView extends StatefulWidget {
@@ -18,7 +16,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  late InputParameterModel inputVal;
+  var inputVal;
   @override
   void initState() {
     super.initState();
@@ -41,7 +39,6 @@ class _HomeViewState extends State<HomeView> {
               icon: const Icon(Icons.settings),
               onPressed: () async {
                 inputVal = await Get.toNamed(AppRouters.settings);
-                print(inputVal.username);
               },
             ),
             CustomButton(
@@ -57,9 +54,9 @@ class _HomeViewState extends State<HomeView> {
               onPressed: () {
                 BlocProvider.of<LoadDataCubit>(context).getData(
                   InputParameterModel(
-                    url: url,
-                    username: 'Gary',
-                    password: '123456789',
+                    url: inputVal?.url ?? '',
+                    username: inputVal?.username ?? '',
+                    password: inputVal?.password ?? '',
                     selectedDate: DateTime.now(),
                   ),
                 );
@@ -71,6 +68,3 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 }
-
-const url =
-    'https://www.skylinecms.co.uk/alpha/RemoteEngineerAPI/GetAppointmentDetails';
