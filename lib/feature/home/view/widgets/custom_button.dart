@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class CustomButton extends StatefulWidget {
   final Function() onPressed;
@@ -20,12 +18,15 @@ class _CustomButtonState extends State<CustomButton> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(
+        vertical: 15,
+      ),
       child: MaterialButton(
         onPressed: widget.onPressed,
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        elevation: 3.8,
+        padding: const EdgeInsets.symmetric(vertical: 10),
         splashColor: Theme.of(context).splashColor,
-        textColor: Colors.black,
+        textColor: Colors.white,
         color: Theme.of(context).primaryColor,
         child: Row(
           children: [
@@ -35,7 +36,9 @@ class _CustomButtonState extends State<CustomButton> {
             ),
             Expanded(
               flex: 4,
-              child: Text(widget.buttonName, textAlign: TextAlign.start),
+              child: Text(widget.buttonName,
+                  style: const TextStyle(fontSize: 18),
+                  textAlign: TextAlign.start),
             )
           ],
         ),
