@@ -30,15 +30,17 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   build_runner: ^2.3.3
+  calendar_date_picker2: null
   cupertino_icons: ^1.0.2
   equatable: ^2.0.5
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
+  get: null
   get_it: ^7.2.0
   http: ^0.13.5
-  xml: 
-  get:
+  intl: ^0.18.0
+  xml: null
 
 dev_dependencies:
   flutter_lints: ^2.0.0

@@ -1,5 +1,6 @@
 import 'package:demo_api/feature/home/model/input_parameter_model.dart';
 import 'package:demo_api/feature/home/view/home_view.dart';
+import 'package:demo_api/feature/settings/view/widgets/date_picker.dart';
 import 'package:get/get.dart';
 
 import 'package:demo_api/feature/settings/view/widgets/input_field.dart';
@@ -16,6 +17,7 @@ class _SettingsViewState extends State<SettingsView> {
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _urlController = TextEditingController();
+  final TextEditingController _datePickerController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +34,7 @@ class _SettingsViewState extends State<SettingsView> {
           InputField(
               controller: _passwordController, labelText: 'Enter Password'),
           //TODO Implement a DatePicker and Pass the value in dd/mm/yyyy format
+          DatePicker(controller: _datePickerController),
           ElevatedButton(
               onPressed: () {
                 saveDetails(
