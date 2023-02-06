@@ -17,18 +17,19 @@ class LoadDataLoading extends LoadDataState {
 }
 
 class LoadDataLoaded extends LoadDataState {
-  // ToDo: Change the return object from message(String) to Reponse DataClass.
+  final ResponseViewModel model;
   final String message;
-  LoadDataLoaded({required this.message});
+  LoadDataLoaded({required this.model, required this.message});
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [model, message];
 }
 
 class LoadDataFailure extends LoadDataState {
+  final IconData icons;
   final String message;
-  LoadDataFailure({required this.message});
+  LoadDataFailure({required this.message, required this.icons});
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [message, icons];
 }

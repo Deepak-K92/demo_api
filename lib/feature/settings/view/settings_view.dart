@@ -33,7 +33,6 @@ class _SettingsViewState extends State<SettingsView> {
               controller: _userNameController, labelText: 'Enter User Name'),
           InputField(
               controller: _passwordController, labelText: 'Enter Password'),
-          //TODO Implement a DatePicker and Pass the value in dd/mm/yyyy format
           DatePicker(controller: _datePickerController),
           ElevatedButton(
               onPressed: () {

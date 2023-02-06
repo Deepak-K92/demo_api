@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
               name: AppRouters.settings, page: (() => const SettingsView())),
           GetPage(
               name: AppRouters.viewAppointments,
-              page: (() => const ViewAppointments())),
+              page: (() => ViewAppointments())),
         ],
         debugShowCheckedModeBanner: false,
       ),

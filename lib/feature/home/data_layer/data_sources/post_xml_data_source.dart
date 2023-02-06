@@ -36,12 +36,20 @@ class PostDataSourceImpl implements PostDataDataSource {
     final docx = XmlDocument.parse(doc);
 
     // *  Working Response Code
-    final responsCode = docx.findAllElements('ResponseCode').map((e) => e.text);
+    final responsCode = docx
+        .findAllElements('ResponseCode')
+        .map((e) => e.text)
+        .reduce((value, element) => value);
     // *  Working Response Description
-    final responseDescription =
-        docx.findAllElements('ResponseDescription').map((e) => e.text);
+    final responseDescription = docx
+        .findAllElements('ResponseDescription')
+        .map((e) => e.text)
+        .reduce((value, element) => value);
     // * Working Full Name
-    final fullName = docx.findAllElements('FullName').map((e) => e.text);
+    final fullName = docx
+        .findAllElements('FullName')
+        .map((e) => e.text)
+        .reduce((value, element) => value);
 
     //? Customer Name
     var namesIterable = docx.findAllElements('Appointment').map((appointment) {
