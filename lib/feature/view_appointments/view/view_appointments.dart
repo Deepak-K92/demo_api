@@ -9,6 +9,7 @@ class ViewAppointments extends StatelessWidget {
       appBar: AppBar(
         title: const Text("View Appointments"),
       ),
+      body: ListView(),
     );
   }
 }

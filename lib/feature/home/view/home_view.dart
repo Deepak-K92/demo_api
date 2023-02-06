@@ -4,27 +4,25 @@ import 'package:demo_api/feature/home/view/widgets/custom_button.dart';
 import 'package:demo_api/static/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+// import 'package:go_router/go_router.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:get/get.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({super.key});
+  const HomeView({
+    super.key,
+  });
 
   @override
   State<HomeView> createState() => _HomeViewState();
 }
 
 class _HomeViewState extends State<HomeView> {
-  final url =
-      'https://www.skylinecms.co.uk/alpha/RemoteEngineerAPI/GetAppointmentDetails';
+  late InputParameterModel inputVal;
   @override
   void initState() {
-    // TODO: implement initState
-    BlocProvider.of<LoadDataCubit>(context).getData(InputParameterModel(
-      url: url,
-      username: 'Gary',
-      password: '123456789',
-      selectedDate: DateTime.now(),
-    ));
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {});
   }
 
   @override
@@ -41,17 +39,31 @@ class _HomeViewState extends State<HomeView> {
             CustomButton(
               buttonName: 'Settings',
               icon: const Icon(Icons.settings),
-              onPressed: () => context.goNamed(AppRouters.settings),
+              onPressed: () async {
+                inputVal = await Get.toNamed(AppRouters.settings);
+                print(inputVal.username);
+              },
             ),
             CustomButton(
               buttonName: 'View Appointments',
               icon: const Icon(Icons.list_sharp),
-              onPressed: () => context.goNamed(AppRouters.viewAppointments),
+              onPressed: () {
+                Get.toNamed(AppRouters.viewAppointments);
+              },
             ),
             CustomButton(
               buttonName: 'Refresh Data',
               icon: const Icon(Icons.refresh),
-              onPressed: () => null,
+              onPressed: () {
+                BlocProvider.of<LoadDataCubit>(context).getData(
+                  InputParameterModel(
+                    url: url,
+                    username: 'Gary',
+                    password: '123456789',
+                    selectedDate: DateTime.now(),
+                  ),
+                );
+              },
             ),
           ],
         ),
@@ -59,3 +71,6 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 }
+
+const url =
+    'https://www.skylinecms.co.uk/alpha/RemoteEngineerAPI/GetAppointmentDetails';

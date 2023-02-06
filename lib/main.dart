@@ -1,18 +1,22 @@
 import 'package:demo_api/feature/dependency_injection/service_locator.dart';
 import 'package:demo_api/feature/home/cubit/load_data_cubit.dart';
-import 'package:demo_api/router/router.dart';
+import 'package:demo_api/feature/home/view/home_view.dart';
+import 'package:demo_api/feature/settings/view/settings_view.dart';
+import 'package:demo_api/feature/view_appointments/view/view_appointments.dart';
+import 'package:demo_api/static/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/route_manager.dart';
 
 void main() {
   initLocator();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+  // final _appRouter = AppRouter();
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -21,15 +25,22 @@ class MyApp extends StatelessWidget {
           create: (context) => LoadDataCubit(),
         ),
       ],
-      child: MaterialApp.router(
-        routeInformationParser: router.routeInformationParser,
-        routerDelegate: router.routerDelegate,
-        routeInformationProvider: router.routeInformationProvider,
+      child: GetMaterialApp(
+        home: const HomeView(),
         title: 'PCCS',
         theme: ThemeData(
             splashColor: Colors.blueGrey,
             primarySwatch: Colors.deepPurple,
             accentColor: Colors.deepPurpleAccent),
+        getPages: [
+          GetPage(name: '/', page: (() => const HomeView())),
+          GetPage(
+              name: AppRouters.settings, page: (() => const SettingsView())),
+          GetPage(
+              name: AppRouters.viewAppointments,
+              page: (() => const ViewAppointments())),
+        ],
+        debugShowCheckedModeBanner: false,
       ),
     );
   }

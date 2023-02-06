@@ -1,3 +1,6 @@
+import 'package:demo_api/feature/home/model/input_parameter_model.dart';
+import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:demo_api/feature/settings/view/widgets/input_field.dart';
 import 'package:flutter/material.dart';
 
@@ -27,9 +30,34 @@ class _SettingsViewState extends State<SettingsView> {
               controller: _userNameController, labelText: 'Enter User Name'),
           InputField(
               controller: _passwordController, labelText: 'Enter Password'),
-          ElevatedButton(onPressed: () {}, child: const Text('SAVE'))
+          //TODO Implement a DatePicker and Pass the value in dd/mm/yyyy format
+          ElevatedButton(
+              onPressed: () {
+                saveDetails(
+                    context: context,
+                    url: _urlController.text,
+                    username: _userNameController.text,
+                    password: _passwordController.text);
+              },
+              child: const Text('SAVE'))
         ],
       ),
     );
   }
+}
+
+saveDetails({
+  required BuildContext context,
+  required String url,
+  required String username,
+  required String password,
+}) {
+  Get.back(
+    result: InputParameterModel(
+      url: url,
+      username: username,
+      password: password,
+      selectedDate: DateTime.now(),
+    ),
+  );
 }
