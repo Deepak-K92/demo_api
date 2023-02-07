@@ -61,6 +61,22 @@ class PostDataSourceImpl implements PostDataDataSource {
     // * Working CustomerName
     List<CustomerName> name = List.from(namesIterable);
 
+    //? Latitude
+    var latitudeIterable =
+        docx.findAllElements('Appointment').map((appointment) {
+      return appointment.findAllElements('ApptLatitude').single.text;
+    });
+    // * Working Latitude
+    List<String> latitude = List.from(latitudeIterable);
+
+    //? Longitude
+    var longitudeIterable =
+        docx.findAllElements('Appointment').map((appointment) {
+      return appointment.findAllElements('ApptLongitude').single.text;
+    });
+    // * Working Longitude
+    List<String> longitude = List.from(longitudeIterable);
+
     //? Address
     var addressIterable =
         docx.findAllElements('Appointment').map((appointment) {
@@ -110,8 +126,8 @@ class PostDataSourceImpl implements PostDataDataSource {
     List<String> mobNo = List.from(mobNoIterable);
 
     // * Working AppointmentList
-    List<Appointment> appointmentList = _mapToAppointmentList(
-        name, address, appointmentDetails, postCode, mobNo);
+    List<Appointment> appointmentList = _mapToAppointmentList(name, address,
+        appointmentDetails, postCode, mobNo, latitude, longitude);
 
     if (responsCode == 'SC0001') {
       return ResponseDataModel(
@@ -129,20 +145,26 @@ class PostDataSourceImpl implements PostDataDataSource {
   }
 
   List<Appointment> _mapToAppointmentList(
-      List<CustomerName> name,
-      List<Address> address,
-      List<AppointmentDetails> appointmentDetails,
-      List<String> postCode,
-      List<String> mobNo) {
+    List<CustomerName> name,
+    List<Address> address,
+    List<AppointmentDetails> appointmentDetails,
+    List<String> postCode,
+    List<String> mobNo,
+    List<String> latitude,
+    List<String> longitude,
+  ) {
     List<Appointment> appointmentsList = [];
 
     for (int i = 0; i < address.length; i++) {
       appointmentsList.add(Appointment(
-          customerName: name[i],
-          address: address[i],
-          appointmentDetails: appointmentDetails[i],
-          postCode: postCode[i],
-          mobileNo: mobNo[i]));
+        customerName: name[i],
+        address: address[i],
+        appointmentDetails: appointmentDetails[i],
+        postCode: postCode[i],
+        mobileNo: mobNo[i],
+        latitude: latitude[i],
+        longitude: longitude[i],
+      ));
     }
     // * Return AppointmentList
     return appointmentsList;

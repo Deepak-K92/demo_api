@@ -28,14 +28,21 @@ class CustomCard extends StatelessWidget {
           _buildHeader(headerName: Static.appointmentDetails, icon: Icons.work),
           _buildAppointmentDetails(appointment.appointmentDetails),
           _buildButtonsBar(
-              mobileNo: appointment.mobileNo, postCode: appointment.postCode)
+              mobileNo: appointment.mobileNo,
+              postCode: appointment.postCode,
+              latitude: appointment.latitude,
+              longitude: appointment.longitude)
         ],
       ),
     );
   }
 }
 
-_buildButtonsBar({required String mobileNo, required String postCode}) {
+_buildButtonsBar(
+    {required String mobileNo,
+    required String postCode,
+    required String latitude,
+    required String longitude}) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.end,
     crossAxisAlignment: CrossAxisAlignment.center,
@@ -51,8 +58,10 @@ _buildButtonsBar({required String mobileNo, required String postCode}) {
           primaryColor: Colors.deepPurple,
           secondaryColor: Colors.white),
       _buildButton(
-          label: Static.map,
-          function: () {},
+          label: postCode,
+          function: () {
+            print("${latitude} , ${longitude}");
+          },
           icon: Icons.pin_drop,
           primaryColor: Colors.white,
           secondaryColor: Colors.deepPurple),

@@ -4,14 +4,17 @@ class Appointment {
   final AppointmentDetails appointmentDetails;
   final String postCode;
   final String mobileNo;
+  final String latitude;
+  final String longitude;
 
-  Appointment({
-    required this.customerName,
-    required this.address,
-    required this.appointmentDetails,
-    required this.postCode,
-    required this.mobileNo,
-  });
+  Appointment(
+      {required this.customerName,
+      required this.address,
+      required this.appointmentDetails,
+      required this.postCode,
+      required this.mobileNo,
+      required this.latitude,
+      required this.longitude});
 }
 
 class Address {
