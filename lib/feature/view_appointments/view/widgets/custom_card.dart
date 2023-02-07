@@ -1,7 +1,6 @@
 import 'package:demo_api/common/model/appointment_model.dart';
 import 'package:demo_api/static/strings.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '../../../../static/styles.dart';
 
@@ -44,7 +43,9 @@ _buildButtonsBar({required String mobileNo, required String postCode}) {
       _buildButton(
           label: Static.call,
           function: () async {
-            if (await canLaunchUrlString(mobileNo)) {}
+            if (await canLaunchUrlString("tel: $mobileNo")) {
+              launchUrlString("tel: $mobileNo");
+            }
           },
           icon: Icons.call,
           primaryColor: Colors.deepPurple,

@@ -3,7 +3,6 @@ import 'package:demo_api/feature/home/model/input_parameter_model.dart';
 import 'package:demo_api/feature/home/model/response_view_model.dart';
 import 'package:demo_api/feature/home/model/view_appointments_arg.dart';
 import 'package:demo_api/feature/home/view/widgets/custom_button.dart';
-import 'package:demo_api/feature/view_appointments/view/view_appointments.dart';
 import 'package:demo_api/static/app_router.dart';
 import 'package:demo_api/static/strings.dart';
 import 'package:flutter/material.dart';
