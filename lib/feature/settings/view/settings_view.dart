@@ -44,7 +44,9 @@ class _SettingsViewState extends State<SettingsView> {
                     context: context,
                     url: _urlController.text,
                     username: _userNameController.text,
-                    password: _passwordController.text);
+                    password: _passwordController.text,
+                    selectedDate:
+                        _datePickerController.text.toNormalTimeFormat());
               },
               child: const Text(Static.save))
         ],
@@ -61,18 +63,18 @@ class _SettingsViewState extends State<SettingsView> {
   }
 }
 
-saveDetails({
-  required BuildContext context,
-  String url = '',
-  String username = '',
-  String password = '',
-}) {
+saveDetails(
+    {required BuildContext context,
+    String url = '',
+    String username = '',
+    String password = '',
+    DateTime? selectedDate}) {
   Get.back(
     result: InputParameterModel(
       url: url,
       username: username,
       password: password,
-      selectedDate: DateTime.now(),
+      selectedDate: selectedDate ?? DateTime.now(),
     ),
   );
 }

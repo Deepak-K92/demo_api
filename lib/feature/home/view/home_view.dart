@@ -68,7 +68,7 @@ class _HomeViewState extends State<HomeView> {
                   url: inputVal?.url ?? '',
                   username: inputVal?.username ?? '',
                   password: inputVal?.password ?? '',
-                  selectedDate: DateTime.now(),
+                  selectedDate: inputVal.selectedDate,
                 ),
               );
             },

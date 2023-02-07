@@ -46,11 +46,12 @@ class _DatePickerState extends State<DatePicker> {
             backgroundColor: Colors.deepPurple,
             child: IconButton(
               onPressed: () async {
-                var temp = await _buildDatePickerDialog();
-
+                List<DateTime?>? temp = await _buildDatePickerDialog();
                 setState(() {
                   widget.controller.text = changeToIndianFormat(
-                      temp.toString().isNotEmpty ? temp[0] : DateTime.now());
+                      temp == null || temp.length == 0
+                          ? DateTime.now()
+                          : temp[0]!);
                 });
               },
               icon: const Icon(

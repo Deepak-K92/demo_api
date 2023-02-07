@@ -18,7 +18,8 @@ class Static {
   static const String viewAppoinments = "View Appointments";
 
   // View Appointments
-  static const String nullBodyText = "Check the Settings as there is no Data";
+  static const String nullBodyText =
+      "Check the Settings & Refresh Data as there is no Data";
 
   // Custom Card
   static const String customerName = "Customer Name";
@@ -69,5 +70,15 @@ extension StringExtensions on String {
       return x;
     }
     return this;
+  }
+}
+
+extension DateTimeConversion on String {
+  DateTime toNormalTimeFormat() {
+    var x = this;
+    var temp = x.split('/');
+    // print(temp);
+
+    return DateTime(int.parse(temp[2]), int.parse(temp[1]), int.parse(temp[0]));
   }
 }

@@ -1,5 +1,6 @@
 import 'package:demo_api/feature/home/model/view_appointments_arg.dart';
 import 'package:demo_api/feature/view_appointments/view/widgets/custom_card.dart';
+import 'package:demo_api/static/styles.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import '../../../static/strings.dart';
@@ -19,25 +20,26 @@ class _ViewAppointmentsState extends State<ViewAppointments> {
   void initState() {
     super.initState();
     model = Get.arguments;
+    print("model => ${model.itemList.length}");
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(222, 255, 255, 255),
+      backgroundColor: const Color.fromARGB(222, 255, 255, 255),
       appBar: AppBar(
-        title: Text(model == null ? Static.viewAppoinments : model.fullName),
+        title: Text(model.fullName != "" ? model.fullName : "<No Data Found>"),
       ),
       body: model == null ? _buildNullBody() : _buildListView(model: model),
     );
   }
 
   _buildNullBody() => const Center(
-        child: Text(Static.nullBodyText,
-            style: TextStyle(
-                color: Colors.purple,
-                fontSize: StaticVal.size_18,
-                fontWeight: FontWeight.w400)),
+        child: Padding(
+          padding: EdgeInsets.all(StaticVal.size_18),
+          child: Text(Static.nullBodyText,
+              textAlign: TextAlign.center, style: errorHandling),
+        ),
       );
 }
 
@@ -50,5 +52,9 @@ _buildListView({required ViewAppointmentsArguments model}) {
           CustomCard(appointment: model.itemList[index]),
     );
   }
-  if (model.responseCode == Static.responseCodeNoDATA) {}
+  if (model.responseCode == Static.responseCodeNoDATA) {
+    return Center(
+      child: Text(model.responseDescription, style: errorHandling),
+    );
+  }
 }
