@@ -1,6 +1,10 @@
 import 'package:demo_api/common/model/appointment_model.dart';
+import 'package:demo_api/feature/view_appointments/model/google_map_args.dart';
+import 'package:demo_api/static/app_router.dart';
 import 'package:demo_api/static/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '../../../../static/styles.dart';
 
@@ -60,7 +64,11 @@ _buildButtonsBar(
       _buildButton(
           label: postCode,
           function: () {
-            print("${latitude} , ${longitude}");
+
+            Get.toNamed(AppRouters.googleMapsView,
+                arguments: GoogleMapArgs(location: LatLng(double.parse(latitude), double.parse(longitude)), pinCode: postCode)
+
+            );
           },
           icon: Icons.pin_drop,
           primaryColor: Colors.white,

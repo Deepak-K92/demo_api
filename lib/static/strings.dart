@@ -36,9 +36,11 @@ class Static {
   static const String chargeType = "Charge Type";
   static const String jobType = "Job Type";
   static const String call = "Call";
-  static const String map = "Map";
 
-  // DatePicker
+  // Google Maps View
+  static const String googleMapsView = "Google Maps View";
+
+  // Date Picker
   static const String date = "Date";
   static const String dateHeading = "Date :";
 

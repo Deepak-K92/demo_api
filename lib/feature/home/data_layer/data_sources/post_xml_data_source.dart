@@ -1,3 +1,5 @@
+import 'package:demo_api/static/strings.dart';
+
 import '../../../../common/model/appointment_model.dart';
 import '../../data_layer/data_models/response_data_model.dart';
 import '../../data_layer/data_models/service_parameter_data_model.dart';
@@ -129,7 +131,7 @@ class PostDataSourceImpl implements PostDataDataSource {
     List<Appointment> appointmentList = _mapToAppointmentList(name, address,
         appointmentDetails, postCode, mobNo, latitude, longitude);
 
-    if (responsCode == 'SC0001') {
+    if (responsCode == Static.responseCodeOK) {
       return ResponseDataModel(
           responseCode: responsCode.toString(),
           responseDescription: responseDescription.toString(),
