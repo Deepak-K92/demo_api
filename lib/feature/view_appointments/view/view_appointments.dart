@@ -1,47 +1,54 @@
-import 'package:demo_api/feature/home/model/response_view_model.dart';
-
-import '../../../common/model/appointment_model.dart';
+import 'package:demo_api/feature/home/model/view_appointments_arg.dart';
+import 'package:demo_api/feature/view_appointments/view/widgets/custom_card.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import '../../../static/strings.dart';
 
-class ViewAppointments extends StatelessWidget {
-  final ResponseViewModel? responseViewModel;
-  ViewAppointments({
+class ViewAppointments extends StatefulWidget {
+  const ViewAppointments({
     super.key,
-    this.responseViewModel,
   });
+
+  @override
+  State<ViewAppointments> createState() => _ViewAppointmentsState();
+}
+
+class _ViewAppointmentsState extends State<ViewAppointments> {
+  late ViewAppointmentsArguments model;
+  @override
+  void initState() {
+    super.initState();
+    model = Get.arguments;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("View Appointments"),
-        ),
-        body: _buildListTile(model: responseViewModel));
-  }
-}
-
-_buildListTile({ResponseViewModel? model}) {
-  if (model?.appointment == null) {
-    return const Center(
-      child: Text("Check Settings and Enter the Right Credentials"),
+      backgroundColor: Color.fromARGB(222, 255, 255, 255),
+      appBar: AppBar(
+        title: Text(model == null ? Static.viewAppoinments : model.fullName),
+      ),
+      body: model == null ? _buildNullBody() : _buildListView(model: model),
     );
   }
-  if (model!.appointment.isNotEmpty && model.responseCode.contains('SC0001')) {
-    _buildListTilesWithData(data: model);
-  }
-  if (model!.appointment.isNotEmpty && model.responseCode.contains('SC0002')) {
-    _buildListTilesNoData(data: model);
-  }
+
+  _buildNullBody() => const Center(
+        child: Text(Static.nullBodyText,
+            style: TextStyle(
+                color: Colors.purple,
+                fontSize: StaticVal.size_18,
+                fontWeight: FontWeight.w400)),
+      );
 }
 
-_buildListTilesNoData({required ResponseViewModel data}) {}
-
-ListView _buildListTilesWithData({required ResponseViewModel data}) {
-  return ListView.builder(
-    itemCount: data.appointment.length,
-    itemBuilder: (context, index) {
-      return Text(
-          "${data.appointment[index].customerName.firstName} ${data.appointment[index].customerName.surname}");
-    },
-  );
+_buildListView({required ViewAppointmentsArguments model}) {
+  if (model.responseCode == Static.responseCodeOK) {
+    return ListView.builder(
+      itemCount: model.itemList.length,
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      itemBuilder: (context, index) =>
+          CustomCard(appointment: model.itemList[index]),
+    );
+  }
+  if (model.responseCode == Static.responseCodeNoDATA) {}
 }

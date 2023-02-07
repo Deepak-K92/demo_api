@@ -1,6 +1,6 @@
 import 'package:demo_api/feature/home/model/input_parameter_model.dart';
-import 'package:demo_api/feature/home/view/home_view.dart';
 import 'package:demo_api/feature/settings/view/widgets/date_picker.dart';
+import 'package:demo_api/static/strings.dart';
 import 'package:get/get.dart';
 
 import 'package:demo_api/feature/settings/view/widgets/input_field.dart';
@@ -22,17 +22,21 @@ class _SettingsViewState extends State<SettingsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Settings"),
+        title: const Text(Static.settings),
       ),
       body: ListView(
         shrinkWrap: true,
-        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+        padding: const EdgeInsets.symmetric(
+            horizontal: StaticVal.size_25, vertical: StaticVal.size_20),
         children: <Widget>[
-          InputField(controller: _urlController, labelText: 'Enter Url'),
+          InputField(controller: _urlController, labelText: Static.enterUrl),
           InputField(
-              controller: _userNameController, labelText: 'Enter User Name'),
+              controller: _userNameController, labelText: Static.enterUserName),
           InputField(
-              controller: _passwordController, labelText: 'Enter Password'),
+            obscureText: true,
+            controller: _passwordController,
+            labelText: Static.enterPassword,
+          ),
           DatePicker(controller: _datePickerController),
           ElevatedButton(
               onPressed: () {
@@ -42,23 +46,21 @@ class _SettingsViewState extends State<SettingsView> {
                     username: _userNameController.text,
                     password: _passwordController.text);
               },
-              child: const Text('SAVE'))
+              child: const Text(Static.save))
         ],
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.text_fields),
         onPressed: () {
-          _userNameController.text = "Gary";
-          _passwordController.text = "123456789";
-          _urlController.text = url;
+          _userNameController.text = Static.userName;
+          _passwordController.text = Static.password;
+          _urlController.text = Static.url;
         },
       ),
     );
   }
 }
 
-const url =
-    'https://www.skylinecms.co.uk/alpha/RemoteEngineerAPI/GetAppointmentDetails';
 saveDetails({
   required BuildContext context,
   String url = '',

@@ -1,7 +1,10 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:demo_api/feature/settings/view/widgets/input_field.dart';
+import 'package:demo_api/static/strings.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+
+const double _size_325 = 325;
+const double _size_400 = 400;
 
 class DatePicker extends StatefulWidget {
   final TextEditingController controller;
@@ -31,11 +34,12 @@ class _DatePickerState extends State<DatePicker> {
       children: [
         const Expanded(
           flex: 1,
-          child: Text("Date :"),
+          child: Text(Static.dateHeading),
         ),
         Expanded(
           flex: 3,
-          child: InputField(controller: widget.controller, labelText: 'Date'),
+          child:
+              InputField(controller: widget.controller, labelText: Static.date),
         ),
         Expanded(
           child: CircleAvatar(
@@ -45,14 +49,14 @@ class _DatePickerState extends State<DatePicker> {
                 var temp = await _buildDatePickerDialog();
 
                 setState(() {
-                  widget.controller.text =
-                      changeToIndianFormat(temp?[0] ?? DateTime.now());
+                  widget.controller.text = changeToIndianFormat(
+                      temp.toString().isNotEmpty ? temp[0] : DateTime.now());
                 });
               },
               icon: const Icon(
                 Icons.calendar_month,
                 color: Colors.white,
-                size: 20,
+                size: StaticVal.size_20,
               ),
             ),
           ),
@@ -65,7 +69,7 @@ class _DatePickerState extends State<DatePicker> {
     return showCalendarDatePicker2Dialog(
       context: context,
       config: CalendarDatePicker2WithActionButtonsConfig(),
-      dialogSize: const Size(325, 400),
+      dialogSize: const Size(_size_325, _size_400),
     );
   }
 }
