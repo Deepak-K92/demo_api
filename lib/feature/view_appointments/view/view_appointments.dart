@@ -20,7 +20,6 @@ class _ViewAppointmentsState extends State<ViewAppointments> {
   void initState() {
     super.initState();
     model = Get.arguments;
-    print("model => ${model.itemList.length}");
   }
 
   @override
@@ -47,7 +46,8 @@ _buildListView({required ViewAppointmentsArguments model}) {
   if (model.responseCode == Static.responseCodeOK) {
     return ListView.builder(
       itemCount: model.itemList.length,
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.symmetric(
+          horizontal: StaticVal.size_5, vertical: StaticVal.size_10),
       itemBuilder: (context, index) =>
           CustomCard(appointment: model.itemList[index]),
     );

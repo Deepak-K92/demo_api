@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 class Static {
   //Dummy Creds
   static const String url =
@@ -25,6 +27,14 @@ class Static {
   static const String customerName = "Customer Name";
   static const String customerAddress = "Customer Address";
   static const String appointmentDetails = "Appointment Details";
+  static const String companyName = "Company Name";
+  static const String buidingName = "Building";
+  static const String customerStreet = "Street";
+  static const String addressArea = "Area";
+  static const String addressTown = "Town";
+  static const String county = "County";
+  static const String chargeType = "Charge Type";
+  static const String jobType = "Job Type";
 
   // DatePicker
   static const String date = "Date";
@@ -43,6 +53,8 @@ class StaticVal {
   static const double size_3_5 = 3.5;
   static const double size_4 = 5;
   static const double size_5 = 5;
+  static const double size_10 = 10;
+  static const double size_15 = 15;
   static const double size_18 = 18;
   static const double size_25 = 25;
   static const double size_20 = 20;
@@ -65,7 +77,7 @@ extension StringExtensions on String {
 
   String returnNoDataVal({String? msg}) {
     var x = this;
-    if (x.contains(' ') && x.isNotEmpty) {
+    if ((x.contains(' ') && x.isNotEmpty) || x == '') {
       x = msg ?? '<No Data>';
       return x;
     }
@@ -77,8 +89,6 @@ extension DateTimeConversion on String {
   DateTime toNormalTimeFormat() {
     var x = this;
     var temp = x.split('/');
-    // print(temp);
-
     return DateTime(int.parse(temp[2]), int.parse(temp[1]), int.parse(temp[0]));
   }
 }
