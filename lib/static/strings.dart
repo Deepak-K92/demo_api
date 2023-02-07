@@ -35,6 +35,8 @@ class Static {
   static const String county = "County";
   static const String chargeType = "Charge Type";
   static const String jobType = "Job Type";
+  static const String call = "Call";
+  static const String map = "Map";
 
   // DatePicker
   static const String date = "Date";

@@ -1,6 +1,8 @@
 import 'package:demo_api/common/model/appointment_model.dart';
 import 'package:demo_api/static/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../../../../static/styles.dart';
 
 class CustomCard extends StatelessWidget {
@@ -26,10 +28,35 @@ class CustomCard extends StatelessWidget {
           _buildAddressWidget(appointment.address),
           _buildHeader(headerName: Static.appointmentDetails, icon: Icons.work),
           _buildAppointmentDetails(appointment.appointmentDetails),
+          _buildButtonsBar(
+              mobileNo: appointment.mobileNo, postCode: appointment.postCode)
         ],
       ),
     );
   }
+}
+
+_buildButtonsBar({required String mobileNo, required String postCode}) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.end,
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: <Widget>[
+      _buildButton(
+          label: Static.call,
+          function: () async {
+            if (await canLaunchUrlString(mobileNo)) {}
+          },
+          icon: Icons.call,
+          primaryColor: Colors.deepPurple,
+          secondaryColor: Colors.white),
+      _buildButton(
+          label: Static.map,
+          function: () {},
+          icon: Icons.pin_drop,
+          primaryColor: Colors.white,
+          secondaryColor: Colors.deepPurple),
+    ],
+  );
 }
 
 _buildNameWidget(CustomerName name) {
@@ -121,6 +148,32 @@ _buildHeader({required String headerName, required IconData icon}) {
           child: Text(headerName.addColon(), style: headerTextStyle2),
         ),
       ],
+    ),
+  );
+}
+
+_buildButton(
+    {required String label,
+    required Function() function,
+    required IconData icon,
+    required Color primaryColor,
+    required Color secondaryColor}) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(
+        horizontal: StaticVal.size_2, vertical: StaticVal.size_4),
+    child: ElevatedButton.icon(
+      onPressed: function,
+      style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(primaryColor),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(StaticVal.size_18),
+                  side: BorderSide(color: secondaryColor)))),
+      icon: Icon(icon, size: StaticVal.size_18, color: secondaryColor),
+      label: Text(
+        label,
+        style: TextStyle(color: secondaryColor, fontSize: StaticVal.size_18),
+      ),
     ),
   );
 }
