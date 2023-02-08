@@ -20,7 +20,7 @@ class Static {
   static const String viewAppoinments = "View Appointments";
   static const String snackBarMessageforSuccess = "Data Loaded Successfully!";
   static const String snackBarMessageforSuccessButNoData =
-      "There is No Data for this Date";
+      "There is No Appointments for this Date";
   static const String snackBarMessageforFailure =
       "Data Failed to Load. Please check the details.";
 
@@ -67,6 +67,7 @@ class Static {
 class StaticVal {
   static const double size_1 = 1;
   static const double size_2 = 2;
+  static const double size_3 = 3;
   static const double size_3_5 = 3.5;
   static const double size_4 = 5;
   static const double size_5 = 5;
@@ -81,6 +82,7 @@ class StaticVal {
   static const double size_22_5 = 22.5;
   static const double size_50 = 50;
   static const double size_250 = 250;
+  static const double size_2100 = 2100;
 }
 
 extension StringExtensions on String {

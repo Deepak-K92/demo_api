@@ -152,7 +152,7 @@ _showSnackBar(
     SnackBar(
       elevation: StaticVal.size_3_5,
       backgroundColor: color,
-      duration: Duration(seconds: StaticVal.size_2.toInt()),
+      duration: Duration(milliseconds: StaticVal.size_2100.toInt()),
       content: Row(
         children: [
           Expanded(

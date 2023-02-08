@@ -24,7 +24,9 @@ class _CustomButtonState extends State<CustomButton> {
       ),
       child: MaterialButton(
         onPressed: widget.onPressed,
-        elevation: StaticVal.size_3_5,
+        elevation: StaticVal.size_2,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(StaticVal.size_10)),
         padding: const EdgeInsets.symmetric(vertical: StaticVal.size_10),
         splashColor: Theme.of(context).splashColor,
         textColor: Colors.white,
