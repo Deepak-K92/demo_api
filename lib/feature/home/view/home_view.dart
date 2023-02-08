@@ -90,9 +90,13 @@ class _HomeViewState extends State<HomeView> {
             _showSnackBar(
                 context: context,
                 message: state.message,
-                color: Colors.green,
+                color: state.model.responseCode == Static.responseCodeOK
+                    ? Colors.green
+                    : Colors.deepOrange,
                 isSuccess: true,
-                icon: Icons.check_circle_outline);
+                icon: state.model.responseCode == Static.responseCodeOK
+                    ? Icons.check_circle_outline
+                    : Icons.priority_high_outlined);
           }
           if (state is LoadDataFailure) {
             _showSnackBar(
