@@ -65,16 +65,19 @@ class LoadDataCubit extends Cubit<LoadDataState> {
       final response =
           await prefs.setString('response', jsonEncode(viewModel.toJson()));
       if (viewModel.responseCode == Static.responseCodeOK) {
-        print("Loaded");
         emit(LoadDataLoaded(
             model: viewModel, message: Static.snackBarMessageforSuccess));
+        emit(LoadDataLoading());
+        await Future.delayed(Duration(seconds: StaticVal.size_2.toInt()));
+        emit(LoadDataInitial());
       } else {
-        print("No Data");
         emit(LoadDataLoaded(
             model: viewModel,
             message: Static.snackBarMessageforSuccessButNoData));
+        emit(LoadDataLoading());
+        await Future.delayed(Duration(seconds: StaticVal.size_2.toInt()));
+        emit(LoadDataInitial());
       }
-      print(" ${viewModel.fullName}");
     } catch (e) {
       emit(LoadDataFailure(
         message: Static.snackBarMessageforFailure,
