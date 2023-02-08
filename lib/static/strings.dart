@@ -57,6 +57,8 @@ class StaticVal {
   static const double size_3_5 = 3.5;
   static const double size_4 = 5;
   static const double size_5 = 5;
+  static const double size_7 = 7;
+  static const double size_8 = 8;
   static const double size_10 = 10;
   static const double size_15 = 15;
   static const double size_18 = 18;

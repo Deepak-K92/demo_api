@@ -47,7 +47,7 @@ _buildListView({required ViewAppointmentsArguments model}) {
     return ListView.builder(
       itemCount: model.itemList.length,
       padding: const EdgeInsets.symmetric(
-          horizontal: StaticVal.size_5, vertical: StaticVal.size_10),
+          horizontal: StaticVal.size_7, vertical: StaticVal.size_8),
       itemBuilder: (context, index) =>
           CustomCard(appointment: model.itemList[index]),
     );

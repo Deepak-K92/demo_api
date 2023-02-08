@@ -15,6 +15,8 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.symmetric(
+          vertical: StaticVal.size_10, horizontal: StaticVal.size_4),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(StaticVal.size_15),
           color: Colors.white),
@@ -64,11 +66,11 @@ _buildButtonsBar(
       _buildButton(
           label: postCode,
           function: () {
-
             Get.toNamed(AppRouters.googleMapsView,
-                arguments: GoogleMapArgs(location: LatLng(double.parse(latitude), double.parse(longitude)), pinCode: postCode)
-
-            );
+                arguments: GoogleMapArgs(
+                    location:
+                        LatLng(double.parse(latitude), double.parse(longitude)),
+                    pinCode: postCode));
           },
           icon: Icons.pin_drop,
           primaryColor: Colors.white,
