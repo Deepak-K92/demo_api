@@ -1,22 +1,52 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:demo_api/feature/dependency_injection/service_locator.dart';
 import 'package:demo_api/feature/home/domain_layer/domain_model/response_domain_model.dart';
 import 'package:demo_api/feature/home/model/response_view_model.dart';
+import 'package:demo_api/static/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../static/app_router.dart';
 import '../domain_layer/domain_model/service_parameters_domain_model.dart';
 import '../domain_layer/usecase/post_data_usecase.dart';
 import '../model/input_parameter_model.dart';
 import 'package:equatable/equatable.dart';
 
+import '../model/view_appointments_arg.dart';
+
 part 'load_data_state.dart';
 
 class LoadDataCubit extends Cubit<LoadDataState> {
   LoadDataCubit() : super(LoadDataInitial());
+  late final pref = SharedPreferences.getInstance();
 
   getInitial() => emit(LoadDataInitial());
 
-  getLoadingState() => emit(LoadDataLoading());
+  getLoadingState() async {
+    emit(LoadDataLoading());
+  }
+
+  navigateToAppointView() async {
+    final prefs = await pref;
+    getLoadingState();
+    final response = await (jsonDecode(prefs.getString('response')!));
+    final jsonModel = ResponseViewModel.fromJson(response);
+
+    getInitial();
+
+    Get.toNamed(
+      AppRouters.viewAppointments,
+      arguments: ViewAppointmentsArguments(
+        responseCode: jsonModel.responseCode ?? '',
+        responseDescription: jsonModel.responseDescription ?? '',
+        fullName: jsonModel.fullName ?? '',
+        appointments: jsonModel.appointment ?? [],
+      ),
+    );
+  }
 
   getData(InputParameterModel model) async {
     PostDataUseCase postDataUseCase = locator<PostDataUseCase>();
@@ -31,20 +61,23 @@ class LoadDataCubit extends Cubit<LoadDataState> {
       ));
 
       ResponseViewModel viewModel = data.mapToViewModel();
-      print(viewModel.responseCode);
-      if (viewModel.responseCode == 'SC0001') {
+      final prefs = await pref;
+      final response =
+          await prefs.setString('response', jsonEncode(viewModel.toJson()));
+      if (viewModel.responseCode == Static.responseCodeOK) {
         print("Loaded");
         emit(LoadDataLoaded(
-            model: viewModel, message: 'Data Loaded Successfully!'));
+            model: viewModel, message: Static.snackBarMessageforSuccess));
       } else {
         print("No Data");
         emit(LoadDataLoaded(
-            model: viewModel, message: 'There is No Data for this Date'));
+            model: viewModel,
+            message: Static.snackBarMessageforSuccessButNoData));
       }
       print(" ${viewModel.fullName}");
     } catch (e) {
       emit(LoadDataFailure(
-        message: 'Data Failed to Load. Please check the details.',
+        message: Static.snackBarMessageforFailure,
         icons: Icons.warning_amber_outlined,
       ));
     }

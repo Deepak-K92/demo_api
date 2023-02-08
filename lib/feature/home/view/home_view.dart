@@ -25,12 +25,6 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
-    // WidgetsBinding.instance.addPostFrameCallback((_) {});
-    BlocProvider.of<LoadDataCubit>(context).getData(InputParameterModel(
-        url: Static.url,
-        username: Static.userName,
-        password: Static.password,
-        selectedDate: DateTime.now()));
   }
 
   _buildBody({ResponseViewModel? model}) {
@@ -63,18 +57,8 @@ class _HomeViewState extends State<HomeView> {
                   child: CustomTitleButton(
                     buttonName: Static.viewAppoinments,
                     icon: Icons.list_sharp,
-
                     onPressed: () {
-                      BlocProvider.of<LoadDataCubit>(context).getInitial();
-                      Get.toNamed(
-                        AppRouters.viewAppointments,
-                        arguments: ViewAppointmentsArguments(
-                          responseCode: model?.responseCode ?? '',
-                          responseDescription: model?.responseDescription ?? '',
-                          fullName: model?.fullName ?? '',
-                          itemList: model?.appointment ?? [],
-                        ),
-                      );
+                      _navigateToViewAppointments(model: model);
                     },
                   ),
                 ),
@@ -85,14 +69,7 @@ class _HomeViewState extends State<HomeView> {
             buttonName: Static.refreshData,
             icon: const Icon(Icons.refresh, size: StaticVal.size_25),
             onPressed: () {
-              BlocProvider.of<LoadDataCubit>(context).getData(
-                InputParameterModel(
-                  url: inputVal?.url ?? '',
-                  username: inputVal?.username ?? '',
-                  password: inputVal?.password ?? '',
-                  selectedDate: inputVal?.selectedDate ?? DateTime.now(),
-                ),
-              );
+              _refreshData(model);
             },
           ),
         ],
@@ -144,6 +121,21 @@ class _HomeViewState extends State<HomeView> {
       ),
     );
   }
+
+  void _refreshData(ResponseViewModel? model) async {
+    BlocProvider.of<LoadDataCubit>(context).getData(
+      InputParameterModel(
+        url: inputVal?.url ?? '',
+        username: inputVal?.username ?? '',
+        password: inputVal?.password ?? '',
+        selectedDate: inputVal?.selectedDate ?? DateTime.now(),
+      ),
+    );
+    BlocProvider.of<LoadDataCubit>(context).getLoadingState();
+  }
+
+  void _navigateToViewAppointments({ResponseViewModel? model}) =>
+      BlocProvider.of<LoadDataCubit>(context).navigateToAppointView();
 }
 
 _showSnackBar(

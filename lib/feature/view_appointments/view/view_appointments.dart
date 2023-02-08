@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import '../../../static/strings.dart';
 import '../view/widgets/error_widget.dart';
 
-
 class ViewAppointments extends StatefulWidget {
   const ViewAppointments({
     super.key,
@@ -36,7 +35,7 @@ class _ViewAppointmentsState extends State<ViewAppointments> {
     );
   }
 
-  _buildNullBody() =>  const Center(
+  _buildNullBody() => const Center(
         child: Padding(
           padding: EdgeInsets.all(StaticVal.size_18),
           child: ErrorWidgetCustom(
@@ -48,18 +47,17 @@ class _ViewAppointmentsState extends State<ViewAppointments> {
 _buildListView({required ViewAppointmentsArguments model}) {
   if (model.responseCode == Static.responseCodeOK) {
     return ListView.builder(
-      itemCount: model.itemList.length,
+      itemCount: model.appointments.length,
       padding: const EdgeInsets.symmetric(
           horizontal: StaticVal.size_7, vertical: StaticVal.size_8),
       itemBuilder: (context, index) =>
-          CustomCard(appointment: model.itemList[index]),
+          CustomCard(appointment: model.appointments[index]),
     );
   }
   if (model.responseCode == Static.responseCodeNoDATA) {
     return ErrorWidgetCustom(
-      message: model.responseDescription, icon: Icons.calendar_today,
+      message: model.responseDescription,
+      icon: Icons.calendar_today,
     );
   }
 }
-
-

@@ -42,7 +42,9 @@ class _SettingsViewState extends State<SettingsView> {
           children: <Widget>[
             InputField(controller: _urlController, labelText: Static.enterUrl),
             InputField(
-                controller: _userNameController, labelText: Static.enterUserName,validator: _validateTextField),
+                controller: _userNameController,
+                labelText: Static.enterUserName,
+                validator: _validateTextField),
             InputField(
               obscureText: true,
               controller: _passwordController,
@@ -52,16 +54,15 @@ class _SettingsViewState extends State<SettingsView> {
             DatePicker(controller: _datePickerController),
             ElevatedButton(
                 onPressed: () {
-                  if(_formKey.currentState!.validate())
-                    {
-                      saveDetails(
-                          context: context,
-                          url: _urlController.text,
-                          username: _userNameController.text,
-                          password: _passwordController.text,
-                          selectedDate:
-                              _datePickerController.text.toNormalTimeFormat());
-                    }
+                  if (_formKey.currentState!.validate()) {
+                    saveDetails(
+                        context: context,
+                        url: _urlController.text,
+                        username: _userNameController.text,
+                        password: _passwordController.text,
+                        selectedDate:
+                            _datePickerController.text.toNormalTimeFormat());
+                  }
                 },
                 child: const Text(Static.save))
           ],
@@ -75,12 +76,11 @@ class _SettingsViewState extends State<SettingsView> {
     _passwordController.text = Static.password;
     _urlController.text = Static.url;
   }
-
-
 }
+
 String? _validateTextField(String? val) {
-  if(val!.isEmpty)  return Static.validationIsTextEmpty;
-  if(val!.length > StaticVal.size_30 )  return Static.validationIsGreaterThan30;
+  if (val!.isEmpty) return Static.validationIsTextEmpty;
+  if (val!.length > StaticVal.size_30) return Static.validationIsGreaterThan30;
 }
 
 saveDetails(
