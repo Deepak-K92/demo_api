@@ -14,6 +14,7 @@ class SettingsView extends StatefulWidget {
 }
 
 class _SettingsViewState extends State<SettingsView> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _urlController = TextEditingController();
@@ -24,32 +25,39 @@ class _SettingsViewState extends State<SettingsView> {
       appBar: AppBar(
         title: const Text(Static.settings),
       ),
-      body: ListView(
-        shrinkWrap: true,
-        padding: const EdgeInsets.symmetric(
-            horizontal: StaticVal.size_25, vertical: StaticVal.size_20),
-        children: <Widget>[
-          InputField(controller: _urlController, labelText: Static.enterUrl),
-          InputField(
-              controller: _userNameController, labelText: Static.enterUserName),
-          InputField(
-            obscureText: true,
-            controller: _passwordController,
-            labelText: Static.enterPassword,
-          ),
-          DatePicker(controller: _datePickerController),
-          ElevatedButton(
-              onPressed: () {
-                saveDetails(
-                    context: context,
-                    url: _urlController.text,
-                    username: _userNameController.text,
-                    password: _passwordController.text,
-                    selectedDate:
-                        _datePickerController.text.toNormalTimeFormat());
-              },
-              child: const Text(Static.save))
-        ],
+      body: Form(
+        key: _formKey,
+        child: ListView(
+          shrinkWrap: true,
+          padding: const EdgeInsets.symmetric(
+              horizontal: StaticVal.size_25, vertical: StaticVal.size_20),
+          children: <Widget>[
+            InputField(controller: _urlController, labelText: Static.enterUrl),
+            InputField(
+                controller: _userNameController, labelText: Static.enterUserName,validator: _validateTextField),
+            InputField(
+              obscureText: true,
+              controller: _passwordController,
+              labelText: Static.enterPassword,
+              validator: _validateTextField,
+            ),
+            DatePicker(controller: _datePickerController),
+            ElevatedButton(
+                onPressed: () {
+                  if(_formKey.currentState!.validate())
+                    {
+                      saveDetails(
+                          context: context,
+                          url: _urlController.text,
+                          username: _userNameController.text,
+                          password: _passwordController.text,
+                          selectedDate:
+                              _datePickerController.text.toNormalTimeFormat());
+                    }
+                },
+                child: const Text(Static.save))
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.text_fields),
@@ -61,6 +69,12 @@ class _SettingsViewState extends State<SettingsView> {
       ),
     );
   }
+
+
+}
+String? _validateTextField(String? val) {
+  if(val!.isEmpty)  return Static.validationIsTextEmpty;
+  if(val!.length > StaticVal.size_30 )  return Static.validationIsGreaterThan30;
 }
 
 saveDetails(

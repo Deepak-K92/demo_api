@@ -50,6 +50,10 @@ class Static {
   // Data Layer
   static const String responseCodeOK = "SC0001";
   static const String responseCodeNoDATA = "SC0002";
+
+  // Validations
+static const String validationIsTextEmpty = "Field is Empty";
+static const String validationIsGreaterThan30 = "Value Length should be less then 30";
 }
 
 //All Numeric and Double Static Values
@@ -67,6 +71,7 @@ class StaticVal {
   static const double size_18 = 18;
   static const double size_25 = 25;
   static const double size_20 = 20;
+  static const double size_30 = 30;
   static const double size_22_5 = 22.5;
   static const double size_50 = 50;
   static const double size_250 = 250;
