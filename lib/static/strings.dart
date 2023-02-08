@@ -39,6 +39,9 @@ class Static {
 
   // Google Maps View
   static const String googleMapsView = "Google Maps View";
+  static const String markerId = "id";
+  static const String markerDescription =
+      "This is the Location of the Customer";
 
   // Date Picker
   static const String date = "Date";

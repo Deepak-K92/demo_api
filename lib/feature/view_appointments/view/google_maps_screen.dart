@@ -30,11 +30,11 @@ class _GoogleMapsViewState extends State<GoogleMapsView> {
     return Scaffold(
       appBar: AppBar(title: const Text(Static.googleMapsView)),
       body: GoogleMap(
-        initialCameraPosition:
-            CameraPosition(target: currentLocation.location, zoom: 16),
+        initialCameraPosition: CameraPosition(
+            target: currentLocation.location, zoom: StaticVal.size_15),
         onMapCreated: (controller) {
           mapController = controller;
-          addMarker(id: 'test', args: currentLocation);
+          addMarker(id: Static.markerId, args: currentLocation);
         },
         markers: _markers.values.toSet(),
       ),
@@ -45,9 +45,8 @@ class _GoogleMapsViewState extends State<GoogleMapsView> {
     var marker = Marker(
         markerId: MarkerId(id),
         position: args.location,
-        infoWindow: InfoWindow(
-            title: args.pinCode,
-            snippet: "This is the Location of the Customer"),
+        infoWindow:
+            InfoWindow(title: args.pinCode, snippet: Static.markerDescription),
         icon:
             BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet));
     _markers[id] = marker;
