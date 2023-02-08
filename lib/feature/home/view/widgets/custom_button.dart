@@ -1,3 +1,4 @@
+import 'package:demo_api/static/strings.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatefulWidget {
@@ -19,26 +20,28 @@ class _CustomButtonState extends State<CustomButton> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-        vertical: 15,
+        vertical: StaticVal.size_15,
       ),
       child: MaterialButton(
         onPressed: widget.onPressed,
-        elevation: 3.8,
-        padding: const EdgeInsets.symmetric(vertical: 10),
+        elevation: StaticVal.size_3_5,
+        padding: const EdgeInsets.symmetric(vertical: StaticVal.size_10),
         splashColor: Theme.of(context).splashColor,
         textColor: Colors.white,
         color: Theme.of(context).primaryColor,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
-              flex: 1,
+              flex: StaticVal.size_2.toInt(),
               child: widget.icon,
             ),
             Expanded(
-              flex: 4,
-              child: Text(widget.buttonName,
-                  style: const TextStyle(fontSize: 18),
-                  textAlign: TextAlign.start),
+              flex: StaticVal.size_4.toInt(),
+              child: Text(
+                widget.buttonName,
+                style: const TextStyle(fontSize: StaticVal.size_20),
+              ),
             )
           ],
         ),

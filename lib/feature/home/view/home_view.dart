@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
+import 'widgets/custom_title_cards.dart';
+
 class HomeView extends StatefulWidget {
   const HomeView({
     super.key,
@@ -35,32 +37,52 @@ class _HomeViewState extends State<HomeView> {
     return Center(
       child: ListView(
         shrinkWrap: true,
-        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
+        physics: const NeverScrollableScrollPhysics(),
+        padding: const EdgeInsets.symmetric(
+          horizontal: StaticVal.size_25,
+        ),
         children: <Widget>[
-          CustomButton(
-            buttonName: Static.settings,
-            icon: const Icon(Icons.settings),
-            onPressed: () async {
-              BlocProvider.of<LoadDataCubit>(context).getInitial();
-              inputVal = await Get.toNamed(AppRouters.settings);
-            },
-          ),
-          CustomButton(
-            buttonName: Static.viewAppoinments,
-            icon: const Icon(Icons.list_sharp),
-            onPressed: () {
-              BlocProvider.of<LoadDataCubit>(context).getInitial();
-              Get.toNamed(AppRouters.viewAppointments,
-                  arguments: ViewAppointmentsArguments(
-                      responseCode: model?.responseCode ?? '',
-                      responseDescription: model?.responseDescription ?? '',
-                      fullName: model?.fullName ?? '',
-                      itemList: model?.appointment ?? []));
-            },
+          SizedBox(
+            height: StaticVal.size_250,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: CustomTitleButton(
+                    buttonName: Static.settings,
+                    icon: Icons.settings,
+                    primaryColor: Colors.white,
+                    secondayColor: Colors.deepPurple,
+                    onPressed: () async {
+                      BlocProvider.of<LoadDataCubit>(context).getInitial();
+                      inputVal = await Get.toNamed(AppRouters.settings);
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: CustomTitleButton(
+                    buttonName: Static.viewAppoinments,
+                    icon: Icons.list_sharp,
+                    onPressed: () {
+                      BlocProvider.of<LoadDataCubit>(context).getInitial();
+                      Get.toNamed(
+                        AppRouters.viewAppointments,
+                        arguments: ViewAppointmentsArguments(
+                          responseCode: model?.responseCode ?? '',
+                          responseDescription: model?.responseDescription ?? '',
+                          fullName: model?.fullName ?? '',
+                          itemList: model?.appointment ?? [],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
           CustomButton(
             buttonName: Static.refreshData,
-            icon: const Icon(Icons.refresh),
+            icon: const Icon(Icons.refresh, size: StaticVal.size_25),
             onPressed: () {
               BlocProvider.of<LoadDataCubit>(context).getData(
                 InputParameterModel(
@@ -80,6 +102,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         title: const Text(Static.home),
       ),

@@ -25,11 +25,12 @@ class _ViewAppointmentsState extends State<ViewAppointments> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(222, 255, 255, 255),
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         title: Text(model.fullName != "" ? model.fullName : "<No Data Found>"),
       ),
-      body: model == null ? _buildNullBody() : _buildListView(model: model),
+      body: (model == null ? _buildNullBody() : _buildListView(model: model)) ??
+          _buildNullBody(),
     );
   }
 
@@ -37,7 +38,7 @@ class _ViewAppointmentsState extends State<ViewAppointments> {
         child: Padding(
           padding: EdgeInsets.all(StaticVal.size_18),
           child: Text(Static.nullBodyText,
-              textAlign: TextAlign.center, style: errorHandling),
+              textAlign: TextAlign.center, style: errorHandling2),
         ),
       );
 }
@@ -54,7 +55,7 @@ _buildListView({required ViewAppointmentsArguments model}) {
   }
   if (model.responseCode == Static.responseCodeNoDATA) {
     return Center(
-      child: Text(model.responseDescription, style: errorHandling),
+      child: Text(model.responseDescription, style: errorHandling2),
     );
   }
 }

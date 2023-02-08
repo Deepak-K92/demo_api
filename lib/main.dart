@@ -30,9 +30,11 @@ class MyApp extends StatelessWidget {
         home: const HomeView(),
         title: 'PCCS',
         theme: ThemeData(
-            splashColor: Colors.blueGrey,
-            primarySwatch: Colors.deepPurple,
-            accentColor: Colors.deepPurpleAccent),
+          splashColor: Colors.blueGrey,
+          primarySwatch: Colors.deepPurple,
+          accentColor: Colors.deepPurpleAccent,
+          backgroundColor: Color.fromARGB(233, 255, 255, 255),
+        ),
         getPages: [
           GetPage(name: '/', page: (() => const HomeView())),
           GetPage(

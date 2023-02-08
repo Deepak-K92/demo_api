@@ -67,7 +67,9 @@ class StaticVal {
   static const double size_18 = 18;
   static const double size_25 = 25;
   static const double size_20 = 20;
+  static const double size_22_5 = 22.5;
   static const double size_50 = 50;
+  static const double size_250 = 250;
 }
 
 extension StringExtensions on String {

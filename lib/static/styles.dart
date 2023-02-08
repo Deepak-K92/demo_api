@@ -6,6 +6,11 @@ const TextStyle errorHandling = TextStyle(
     fontSize: StaticVal.size_15,
     fontWeight: FontWeight.w400);
 
+const TextStyle errorHandling2 = TextStyle(
+    color: Colors.purple,
+    fontSize: StaticVal.size_18,
+    fontWeight: FontWeight.bold);
+
 const headerTextStyle = TextStyle(
     color: Colors.black54,
     fontSize: StaticVal.size_15,
