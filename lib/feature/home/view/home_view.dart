@@ -63,6 +63,7 @@ class _HomeViewState extends State<HomeView> {
                   child: CustomTitleButton(
                     buttonName: Static.viewAppoinments,
                     icon: Icons.list_sharp,
+
                     onPressed: () {
                       BlocProvider.of<LoadDataCubit>(context).getInitial();
                       Get.toNamed(

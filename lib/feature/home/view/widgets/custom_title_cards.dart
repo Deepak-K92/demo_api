@@ -49,7 +49,7 @@ class _CustomTitleButtonState extends State<CustomTitleButton> {
             Expanded(
               flex: StaticVal.size_2.toInt(),
               child: Text(widget.buttonName,
-                  style: const TextStyle(fontSize: StaticVal.size_22_5),
+                  style: const TextStyle(fontSize: StaticVal.size_20),
                   textAlign: TextAlign.center),
             )
           ],

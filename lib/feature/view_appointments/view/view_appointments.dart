@@ -1,9 +1,10 @@
 import 'package:demo_api/feature/home/model/view_appointments_arg.dart';
 import 'package:demo_api/feature/view_appointments/view/widgets/custom_card.dart';
-import 'package:demo_api/static/styles.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import '../../../static/strings.dart';
+import '../view/widgets/error_widget.dart';
+
 
 class ViewAppointments extends StatefulWidget {
   const ViewAppointments({
@@ -27,18 +28,19 @@ class _ViewAppointmentsState extends State<ViewAppointments> {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        title: Text(model.fullName != "" ? model.fullName : Static.viewAppoinments),
+        title: Text(
+            model.fullName != "" ? model.fullName : Static.viewAppoinments),
       ),
       body: (model == null ? _buildNullBody() : _buildListView(model: model)) ??
           _buildNullBody(),
     );
   }
 
-  _buildNullBody() => const Center(
+  _buildNullBody() =>  const Center(
         child: Padding(
           padding: EdgeInsets.all(StaticVal.size_18),
-          child: Text(Static.nullBodyText,
-              textAlign: TextAlign.center, style: errorHandling2),
+          child: ErrorWidgetCustom(
+              message: Static.nullBodyText, icon: Icons.warning_amber_rounded),
         ),
       );
 }
@@ -54,8 +56,10 @@ _buildListView({required ViewAppointmentsArguments model}) {
     );
   }
   if (model.responseCode == Static.responseCodeNoDATA) {
-    return Center(
-      child: Text(model.responseDescription, style: errorHandling2),
+    return ErrorWidgetCustom(
+      message: model.responseDescription, icon: Icons.calendar_today,
     );
   }
 }
+
+
