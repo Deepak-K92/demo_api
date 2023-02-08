@@ -22,7 +22,6 @@ class _SettingsViewState extends State<SettingsView> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     setDefaultValues();
   }
@@ -80,7 +79,7 @@ class _SettingsViewState extends State<SettingsView> {
 
 String? _validateTextField(String? val) {
   if (val!.isEmpty) return Static.validationIsTextEmpty;
-  if (val!.length > StaticVal.size_30) return Static.validationIsGreaterThan30;
+  if (val.length > StaticVal.size_30) return Static.validationIsGreaterThan30;
 }
 
 saveDetails(

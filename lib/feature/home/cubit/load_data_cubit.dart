@@ -40,10 +40,10 @@ class LoadDataCubit extends Cubit<LoadDataState> {
     Get.toNamed(
       AppRouters.viewAppointments,
       arguments: ViewAppointmentsArguments(
-        responseCode: jsonModel.responseCode ?? '',
-        responseDescription: jsonModel.responseDescription ?? '',
-        fullName: jsonModel.fullName ?? '',
-        appointments: jsonModel.appointment ?? [],
+        responseCode: jsonModel.responseCode,
+        responseDescription: jsonModel.responseDescription,
+        fullName: jsonModel.fullName,
+        appointments: jsonModel.appointment,
       ),
     );
   }

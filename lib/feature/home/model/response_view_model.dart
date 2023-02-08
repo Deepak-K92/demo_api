@@ -30,7 +30,7 @@ class ResponseViewModel {
       };
 }
 
-extension mapper on ResponseDomainModel {
+extension Mapper on ResponseDomainModel {
   ResponseViewModel mapToViewModel() {
     return ResponseViewModel(
       responseCode: this.responseCode,

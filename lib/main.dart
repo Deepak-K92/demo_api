@@ -11,11 +11,11 @@ import 'package:get/route_manager.dart';
 
 void main() {
   initLocator();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
   // final _appRouter = AppRouter();
 
   @override
@@ -32,11 +32,11 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           splashColor: Colors.blueGrey,
           primarySwatch: Colors.deepPurple,
-          accentColor: Colors.deepPurpleAccent,
-          backgroundColor: Color.fromARGB(233, 255, 255, 255),
+          // accentColor: Colors.deepPurpleAccent,
+          backgroundColor: const Color.fromARGB(233, 255, 255, 255),
         ),
         getPages: [
-          GetPage(name: '/', page: (() => const HomeView())),
+          GetPage(name: AppRouters.home, page: (() => const HomeView())),
           GetPage(
               name: AppRouters.settings, page: (() => const SettingsView())),
           GetPage(
