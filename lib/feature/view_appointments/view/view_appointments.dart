@@ -27,7 +27,7 @@ class _ViewAppointmentsState extends State<ViewAppointments> {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        title: Text(model.fullName != "" ? model.fullName : "<No Data Found>"),
+        title: Text(model.fullName != "" ? model.fullName : Static.viewAppoinments),
       ),
       body: (model == null ? _buildNullBody() : _buildListView(model: model)) ??
           _buildNullBody(),

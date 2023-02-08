@@ -19,6 +19,14 @@ class _SettingsViewState extends State<SettingsView> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _urlController = TextEditingController();
   final TextEditingController _datePickerController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setDefaultValues();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,15 +67,13 @@ class _SettingsViewState extends State<SettingsView> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.text_fields),
-        onPressed: () {
-          _userNameController.text = Static.userName;
-          _passwordController.text = Static.password;
-          _urlController.text = Static.url;
-        },
-      ),
     );
+  }
+
+  void setDefaultValues() {
+    _userNameController.text = Static.userName;
+    _passwordController.text = Static.password;
+    _urlController.text = Static.url;
   }
 
 
