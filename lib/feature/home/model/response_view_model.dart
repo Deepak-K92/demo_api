@@ -12,6 +12,22 @@ class ResponseViewModel {
       required this.responseDescription,
       required this.fullName,
       required this.appointment});
+
+  factory ResponseViewModel.fromJson(Map<String, dynamic> json) =>
+      ResponseViewModel(
+        responseCode: json['responseCode'],
+        responseDescription: json['responseDescription'],
+        fullName: json['fullName'],
+        appointment: List<Appointment>.from(
+            json["appointment"].map((x) => Appointment.fromJson(x))),
+      );
+
+  toJson() => {
+        'responseCode': responseCode,
+        'responseDescription': responseDescription,
+        'fullName': fullName,
+        'appointment': List<dynamic>.from(appointment.map((x) => x.toJson())),
+      };
 }
 
 extension mapper on ResponseDomainModel {

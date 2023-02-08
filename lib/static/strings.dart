@@ -18,6 +18,11 @@ class Static {
   static const String home = "Home";
   static const String refreshData = "Refresh Data";
   static const String viewAppoinments = "View Appointments";
+  static const String snackBarMessageforSuccess = "Data Loaded Successfully!";
+  static const String snackBarMessageforSuccessButNoData =
+      "There is No Data for this Date";
+  static const String snackBarMessageforFailure =
+      "Data Failed to Load. Please check the details.";
 
   // View Appointments
   static const String nullBodyText =
@@ -52,8 +57,9 @@ class Static {
   static const String responseCodeNoDATA = "SC0002";
 
   // Validations
-static const String validationIsTextEmpty = "Field is Empty";
-static const String validationIsGreaterThan30 = "Value Length should be less then 30";
+  static const String validationIsTextEmpty = "Field is Empty";
+  static const String validationIsGreaterThan30 =
+      "Value Length should be less then 30";
 }
 
 //All Numeric and Double Static Values
