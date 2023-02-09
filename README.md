@@ -4,7 +4,16 @@ Flutter app where we send and recieve data in the XML format.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+* This is a project where need to fetch data from the server with a POST method by giving dynamic values from the user.
+* This will in turn give the response in XML format.
+* We have to parse the XML format(response) into DATA CLASSES.
+* Use clean architecture as architecture
+* Use BLOC as STATE MANAGEMENT
+* Create Custom Widgets
+* Display dynamic location in GOOGLE MAPS.
+* When pressed on CALL it should redirect to DIALER.
+* Use validations for USERNAME and PASSWORD where the entries should not be of more than 30 characters.
+
 
 
 ## Project Flow
